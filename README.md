@@ -79,7 +79,8 @@ Stripe Service - REST API тестового задания для создан�
 		API_HOST={your_host_ip_with_port}
 		STRIPE_PUBLISH_API_KEY={your_stripe_publish_api_key}
 		STRIPE_SECRET_API_KEY={your_stripe_secret_api_key}
-
+        
+		DATABASE=postgres
 
 4. Инициализировать .env.prod.db со следующими переменными:
 
