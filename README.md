@@ -47,7 +47,8 @@ Stripe Service - REST API тестового задания для создан�
 - Django==4.1.3
 - djangorestframework==3.14.0  
 - psycopg2=2.9.5
-- stripe=5.0.0
+- stripe==5.0.0
+- gunicorn==20.1.0
 
 
 Запуск проекта
@@ -69,14 +70,13 @@ Stripe Service - REST API тестового задания для создан�
 		SECRET_KEY={your_secret_key}
 		DJANGO_ALLOWED_HOSTS={your_host_ip}
 
-		SQL_ENGINE=django.db.backends.postgresql
-	    SQL_NAME=stripe_db
-        SQL_USER=manager
-        SQL_PASSWORD={your_sql_password}
-        SQL_HOST=db
-        SQL_PORT={your_sql_port}
+        POSTGRES_NAME=stripe_db
+	    POSTGRES_USER=manager
+	    POSTGRES_PASSWORD={your_sql_password}
+	    POSTGRES_HOST=db
+	    POSTGRES_PORT={your_sql_port}
 		
-		API_HOST={your_host_ip_with_port}
+        API_HOST={your_host_ip_with_port}
 		STRIPE_PUBLISH_API_KEY={your_stripe_publish_api_key}
 		STRIPE_SECRET_API_KEY={your_stripe_secret_api_key}
         
