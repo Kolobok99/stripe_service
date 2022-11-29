@@ -92,5 +92,11 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "java_script")]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+API_HOST = os.environ.get('API_HOST')
+
+STRIPE_PUBLISH_API_KEY = os.environ.get('STRIPE_PUBLISH_API_KEY')
+STRIPE_SECRET_API_KEY = os.environ.get('STRIPE_SECRET_API_KEY')

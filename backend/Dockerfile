@@ -2,10 +2,11 @@ FROM python:3.8
 
 WORKDIR /app
 
-COPY req.txt /app/req.txt
+COPY . /app/
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
+RUN pip install pipenv
 RUN pipenv requirements > req.txt
 RUN apt-get update \
     && apt-get  install -y libpq-dev \
@@ -15,6 +16,5 @@ RUN apt-get update \
     && pip install --upgrade pip \
     && pip install -r /app/req.txt
 
-COPY . /app/
 
 RUN chmod +x /app/scripts/wait_db.sh

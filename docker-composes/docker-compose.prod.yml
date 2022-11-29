@@ -6,15 +6,14 @@ volumes:
 
 networks:
   default:
-    name: drf_template_prod_network
+    name: stripe_prod_network
 
 services:
-  prod_web:
-    container_name: drf_template_prod_web_container
+  web:
+    container_name: stripe_prod_web_container
     build:
       context: ../backend
       dockerfile: Dockerfile.prod
-    image: "${WEB_IMAGE}"
     command: bash -c "
       python manage.py migrate
       && python manage.py collectstatic --noinput
@@ -24,12 +23,12 @@ services:
       - prod_static_volume:/web/static
     expose:
       - 8000
-    env_file: ../backend/.env_files.prod/.env.prod.settings
+    env_file: ../backend/.env.prod/.env.settings
     depends_on:
-      - prod_db
+      - db
 
-  prod_db:
-    container_name: drf_template_prod_db_container
+  db:
+    container_name: stripe_prod_db_container
     image: postgres
     volumes:
       - prod_postgres_data:/var/lib/postgresql/data
@@ -38,20 +37,19 @@ services:
     ports:
       - "5432:5432"
     env_file:
-      - ../backend/.env_files.prod/.env.prod.db
+      - ../backend/.env.prod/.env.db
 
 
 
-  prod_nginx:
-    container_name: drf_template_prod_nginx_container
+  nginx:
+    container_name: stripe_prod_nginx_container
     build:
       context: ../nginx.prod
-    image: "${NGINX_IMAGE}"
     volumes:
       - prod_static_volume:/web/static
     ports:
       - "80:80"
     depends_on:
-      - prod_web
+      - web
 
 
