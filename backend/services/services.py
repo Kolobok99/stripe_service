@@ -4,8 +4,10 @@ import stripe
 
 from apps.orders.models import Item, Order, Discount, Tax
 from conf.settings import STRIPE_SECRET_API_KEY
+from conf.settings import API_HOST
 
 stripe.api_key = STRIPE_SECRET_API_KEY
+
 
 
 def create_session(instance: Union[Item, Order]) -> dict:
@@ -26,8 +28,8 @@ def create_session(instance: Union[Item, Order]) -> dict:
         disc = [{'coupon': discount_id}]
 
     session: dict = stripe.checkout.Session.create(
-        success_url="http://localhost:8000/success",
-        cancel_url="https://localhost:8000/cancel",
+        success_url=f"https://{API_HOST}/success",
+        cancel_url=f"https://{API_HOST}/cancel",
         line_items=line_items,
         mode="payment",
         discounts=disc
